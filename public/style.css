@@ -1,0 +1,272 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; }
+
+html {
+  background: red; }
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+#tv {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 3rem 0 4rem 0;
+  background: #100e17;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px gray solid;
+  border-radius: 8px; }
+
+.controlButton {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  background: red;
+  box-shadow: 0px 3px 0 0 red;
+  border: 1px solid gray;
+  border-radius: 50%;
+  color: gold;
+  font-weight: bolder; }
+  .controlButton.touchActive {
+    border: 1px solid white;
+    margin-top: 3px;
+    box-shadow: none; }
+  .controlButton.dPadControlButton.controlButtonUp {
+    top: calc(50% - 4rem * 0.5 - 4rem);
+    left: calc(50% - 4rem * 0.5); }
+  .controlButton.dPadControlButton.controlButtonDown {
+    top: calc(50% - 4rem * 0.5 + 4rem);
+    left: calc(50% - 4rem * 0.5); }
+  .controlButton.dPadControlButton.controlButtonLeft {
+    top: calc(50% - 4rem * 0.5);
+    left: calc(50% - 4rem * 0.5 - 4rem); }
+  .controlButton.dPadControlButton.controlButtonRight {
+    top: calc(50% - 4rem * 0.5);
+    right: calc(50% - 4rem * 0.5 - 4rem); }
+  .controlButton.actionControlButton.controlButtonB {
+    top: calc(50% - 4rem * 0.5 - 1rem);
+    left: calc(50% - 4rem * 0.5 - 4rem); }
+  .controlButton.actionControlButton.controlButtonA {
+    top: calc(50% - 4rem * 0.5 + 1rem);
+    right: calc(50% - 4rem * 0.5 - 4rem); }
+  .controlButton.controlButtonStart {
+    top: 2rem;
+    right: calc(50% - 4rem * 0.5); }
+
+#canvasWrapper {
+  position: relative;
+  background: #100e17;
+  background: transparent;
+  width: 100%;
+  height: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+#gameScreen {
+  position: relative;
+  border: 10px solid black;
+  border-radius: 8px;
+  z-index: 1; }
+
+#box1 {
+  position: relative;
+  z-index: 1;
+  width: max-content;
+  border: 1rem solid #2b2929;
+  border-top: 1rem solid black;
+  border-bottom: 1rem solid black;
+  border-radius: 8px;
+  background: black;
+  grid-area: box1;
+  justify-self: center; }
+
+#tv-name {
+  position: absolute;
+  bottom: 1.5rem;
+  color: white; }
+
+.speaker {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: black; }
+  .speaker.speakerLeft {
+    grid-area: speakerLeft; }
+  .speaker.speakerRight {
+    grid-area: speakerRight; }
+
+.infoButton {
+  position: absolute;
+  z-index: 4;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: blue;
+  color: white;
+  top: 5%; }
+  .infoButton#aboutInfoButton {
+    left: 1rem; }
+  .infoButton#touchInfoButton {
+    right: 1rem; }
+
+.modalWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5); }
+  .modalWrapper .modal {
+    padding: 1rem;
+    background: black;
+    width: max-content;
+    height: max-content;
+    border-radius: 8px;
+    border: 1px solid white;
+    color: white; }
+    .modalWrapper .modal .confirmButtonWrapper {
+      width: 100%;
+      height: 20%;
+      text-align: center; }
+      .modalWrapper .modal .confirmButtonWrapper .confirmButton {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        font-size: large; }
+    .modalWrapper .modal h1 {
+      text-align: center; }
+    .modalWrapper .modal p {
+      text-align: center;
+      margin-bottom: 1rem; }
+
+.hidden {
+  display: none; }
+
+@media screen and (max-width: 640px) and (orientation: portrait) {
+  .infoButton {
+    top: 3%; }
+  #box1 {
+    width: initial; }
+    #box1 #gameScreen {
+      width: 100%; }
+  #canvasWrapper {
+    display: grid;
+    grid-template-areas: "box1 box1" "speakerLeft speakerRight" "speakerLeft speakerRight" "speakerLeft speakerRight"; }
+  .controlButton.controlButtonStart {
+    top: unset;
+    bottom: 5%;
+    left: calc(-4rem / 2); } }
+
+@media screen and (min-width: 641px) and (orientation: portrait) {
+  .infoButton {
+    top: 3%; }
+  #box1 {
+    width: initial; }
+    #box1 #gameScreen {
+      width: 100%; }
+  #canvasWrapper {
+    display: grid;
+    grid-template-areas: "box1 box1" "speakerLeft speakerRight" "speakerLeft speakerRight" "speakerLeft speakerRight"; }
+  .controlButton.controlButtonStart {
+    top: unset;
+    bottom: 5%;
+    left: calc(-4.5rem / 2); } }
+
+@media screen and (min-height: 641px) and (orientation: landscape) {
+  .controlButton {
+    position: absolute;
+    width: 4.5rem;
+    height: 4.5rem;
+    background: red;
+    box-shadow: 0px 3px 0 0 red;
+    border: 1px solid gray;
+    border-radius: 50%;
+    color: gold;
+    font-weight: bolder; }
+    .controlButton.touchActive {
+      border: 1px solid white;
+      margin-top: 3px;
+      box-shadow: none; }
+    .controlButton.dPadControlButton.controlButtonUp {
+      top: calc(50% - 4.5rem * 0.5 - 4.5rem);
+      left: calc(50% - 4.5rem * 0.5); }
+    .controlButton.dPadControlButton.controlButtonDown {
+      top: calc(50% - 4.5rem * 0.5 + 4.5rem);
+      left: calc(50% - 4.5rem * 0.5); }
+    .controlButton.dPadControlButton.controlButtonLeft {
+      top: calc(50% - 4.5rem * 0.5);
+      left: calc(50% - 4.5rem * 0.5 - 4.5rem); }
+    .controlButton.dPadControlButton.controlButtonRight {
+      top: calc(50% - 4.5rem * 0.5);
+      right: calc(50% - 4.5rem * 0.5 - 4.5rem); }
+    .controlButton.actionControlButton.controlButtonB {
+      top: calc(50% - 4.5rem * 0.5 - 1.125rem);
+      left: calc(50% - 4.5rem * 0.5 - 4.5rem); }
+    .controlButton.actionControlButton.controlButtonA {
+      top: calc(50% - 4.5rem * 0.5 + 1.125rem);
+      right: calc(50% - 4.5rem * 0.5 - 4.5rem); }
+    .controlButton.controlButtonStart {
+      top: 2.25rem;
+      right: calc(50% - 4.5rem * 0.5); }
+  .infoButton {
+    width: 4.5rem;
+    height: 4.5rem; } }
+
+@media screen and (min-height: 751px) and (orientation: landscape) {
+  .controlButton {
+    position: absolute;
+    width: 6rem;
+    height: 6rem;
+    background: red;
+    box-shadow: 0px 3px 0 0 red;
+    border: 1px solid gray;
+    border-radius: 50%;
+    color: gold;
+    font-weight: bolder; }
+    .controlButton.touchActive {
+      border: 1px solid white;
+      margin-top: 3px;
+      box-shadow: none; }
+    .controlButton.dPadControlButton.controlButtonUp {
+      top: calc(50% - 6rem * 0.5 - 6rem);
+      left: calc(50% - 6rem * 0.5); }
+    .controlButton.dPadControlButton.controlButtonDown {
+      top: calc(50% - 6rem * 0.5 + 6rem);
+      left: calc(50% - 6rem * 0.5); }
+    .controlButton.dPadControlButton.controlButtonLeft {
+      top: calc(50% - 6rem * 0.5);
+      left: calc(50% - 6rem * 0.5 - 6rem); }
+    .controlButton.dPadControlButton.controlButtonRight {
+      top: calc(50% - 6rem * 0.5);
+      right: calc(50% - 6rem * 0.5 - 6rem); }
+    .controlButton.actionControlButton.controlButtonB {
+      top: calc(50% - 6rem * 0.5 - 1.5rem);
+      left: calc(50% - 6rem * 0.5 - 6rem); }
+    .controlButton.actionControlButton.controlButtonA {
+      top: calc(50% - 6rem * 0.5 + 1.5rem);
+      right: calc(50% - 6rem * 0.5 - 6rem); }
+    .controlButton.controlButtonStart {
+      top: 3rem;
+      right: calc(50% - 6rem * 0.5); }
+  .infoButton {
+    width: 6rem;
+    height: 6rem; } }

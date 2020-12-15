@@ -1,0 +1,320 @@
+// Media query mixins
+@mixin mediaSize($width, $minMax,$orientation:both) {
+    @debug width $width;
+    @debug minMax $minMax;
+    @debug orientation $orientation;
+    $wOrH:width;
+    @if $orientation == landscape{
+        $wOrH:height;
+    }
+    $query: "screen and (#{$minMax}-#{$wOrH}: #{$width}px)";
+    @if $orientation != both{
+        $query: "#{$query} and (orientation: #{$orientation})";
+    }
+    @media #{$query}{
+        @content;
+    }
+
+
+}
+
+
+$screenWidth0: 640;
+$screenHeight0: 1137;
+$screenWidth1: 750;
+$screenHeight1: 1334;
+$screenWidth2: 1080;
+$screenHeight2: 1920;
+
+@mixin mediaSm {@include mediaSize($screenWidth0, max, both){@content;}}
+@mixin mediaMd {@include mediaSize($screenWidth0+1, min, both){@content;}}
+@mixin mediaLg {@include mediaSize($screenWidth1+1, min, both){@content;}}
+@mixin mediaXL {@include mediaSize($screenWidth2+1, min, both){@content;}}
+
+@mixin mediaSmPortrait {@include mediaSize($screenWidth0, max, portrait){@content;}}
+@mixin mediaMdPortrait {@include mediaSize($screenWidth0+1, min, portrait){@content;}}
+@mixin mediaLgPortrait {@include mediaSize($screenWidth1+1, min, portrait){@content;}}
+@mixin mediaXLPortrait {@include mediaSize($screenWidth2+1, min, portrait){@content;}}
+
+@mixin mediaSmLandscape {@include mediaSize($screenWidth0, max, landscape){@content;}}
+@mixin mediaMdLandscape {@include mediaSize($screenWidth0+1, min, landscape){@content;}}
+@mixin mediaLgLandscape {@include mediaSize($screenWidth1+1, min, landscape){@content;}}
+@mixin mediaXLLandscape {@include mediaSize($screenWidth2+1, min, landscape){@content;}}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    background:red;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background:black;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+#tv{
+    position: relative;
+    width:100%;
+    height: 100%;
+    padding:3rem 0 4rem 0;
+    background: #100e17;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px gray solid;
+    border-radius: 8px;
+}
+
+@mixin controlButton($devButtonSize){
+    .controlButton{
+        position: absolute;
+        width: $devButtonSize;
+        height:$devButtonSize;
+        background:red;
+        box-shadow: 0px 3px 0 0 red;
+        border: 1px solid gray;
+        border-radius: 50%;
+        color:gold;
+        font-weight: bolder;
+    
+        &.touchActive{
+            border: 1px solid white;
+            margin-top: 3px;
+            box-shadow: none;
+        }
+    
+        
+        $dpadMinTop:50% - #{$devButtonSize} * 0.5;
+        $buttonMinWallDist: #{$dpadMinTop} - #{$devButtonSize};
+        &.dPadControlButton{
+            &.controlButtonUp{
+                top:calc(#{$buttonMinWallDist});
+                left:calc(#{$dpadMinTop});
+            }
+            &.controlButtonDown{
+                top:calc(#{$dpadMinTop} + #{$devButtonSize});
+                left:calc(#{$dpadMinTop});
+            }
+            &.controlButtonLeft{
+                top:calc(#{$dpadMinTop});
+                left:calc(#{$buttonMinWallDist});
+            }
+            &.controlButtonRight{
+                top:calc(#{$dpadMinTop});
+                right:calc(#{$buttonMinWallDist});
+            }
+        }
+    
+        &.actionControlButton{
+            $abButtonShift:$devButtonSize / 4;
+            $adButtonTopBottomDist: #{$dpadMinTop} - #{$abButtonShift};
+            &.controlButtonB{
+                top:calc(#{$adButtonTopBottomDist});
+                left:calc(#{$buttonMinWallDist});
+            }
+            &.controlButtonA{
+                top:calc(#{$dpadMinTop} + #{$abButtonShift});
+                right:calc(#{$buttonMinWallDist});
+            }
+        }
+    
+        &.controlButtonStart{
+            top: $devButtonSize / 2;
+            right:calc(#{$dpadMinTop});
+        }
+    }
+}
+
+@include controlButton(4rem);
+
+#canvasWrapper{
+    position: relative;
+    background: #100e17;
+    background: transparent;
+    width:100%;
+    height: 95%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#gameScreen{
+    position: relative;
+    border: 10px solid black;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+#box1{
+    position: relative;
+    z-index: 1;
+    width: max-content;
+    border: 1rem solid rgb(43, 41, 41);
+    border-top: 1rem solid black;
+    border-bottom: 1rem solid black;
+    border-radius: 8px;
+    background: black;
+
+    grid-area: box1;
+    justify-self: center;
+}
+
+#tv-name{
+    position: absolute;
+    bottom: 1.5rem;
+    color:white;
+}
+
+.speaker{
+    position: relative;
+    width: 100%;
+    height:100%;
+    background:black;
+
+    &.speakerLeft{
+        grid-area: speakerLeft;
+    }
+
+    &.speakerRight{
+        grid-area: speakerRight;
+    }
+}
+
+.infoButton{
+    position: absolute;
+    z-index: 4;
+    width: 4rem;
+    height: 4rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: blue;
+    color:white;
+    
+    top: 5%;
+    &#aboutInfoButton{
+        left: 1rem;
+    }
+
+    &#touchInfoButton{
+        right: 1rem;
+    }
+}
+
+.modalWrapper{
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 5;
+    width:100vw;
+    height:100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(white, 0.5);
+    .modal{
+        padding:1rem;
+        background: black;
+        width:max-content;
+        height:max-content;
+        border-radius: 8px;
+        border: 1px solid white;
+        color:white;
+
+        .confirmButtonWrapper{
+            width:100%;
+            height: 20%;
+            text-align: center;
+            .confirmButton{
+                width: 4rem;
+                height: 4rem;
+                border-radius: 50%;
+                font-size: large;
+            }
+        }
+        h1{
+            text-align: center;
+        }
+        p{
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+
+.hidden{
+    display:none;
+}
+
+@mixin portrait{
+    .infoButton{
+        top: 3%;
+    }
+    #box1{
+       width: initial; 
+       #gameScreen{
+            width:100%;
+       }
+    }
+    #canvasWrapper{
+        display:grid;
+        grid-template-areas: 
+        "box1 box1"
+        "speakerLeft speakerRight"
+        "speakerLeft speakerRight"
+        "speakerLeft speakerRight";
+    }
+}
+
+@include mediaSmPortrait{
+    @include portrait;
+    .controlButton{
+        &.controlButtonStart{
+            top: unset;
+            bottom: 5%;
+            left: calc(-4rem / 2);
+        }
+    }
+}
+
+@include mediaMdPortrait{
+    @include portrait;
+    .controlButton{
+        &.controlButtonStart{
+            top: unset;
+            bottom: 5%;
+            left: calc(-4.5rem / 2);
+        }
+    }
+}
+
+@include mediaMdLandscape{
+    @include controlButton(4.5rem);
+    .infoButton{
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+}
+
+@include mediaLgLandscape{
+    @include controlButton(6rem);
+    .infoButton{
+        width: 6rem;
+        height: 6rem;
+    }
+}

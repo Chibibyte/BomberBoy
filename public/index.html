@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BomberBoy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+    <div id="tv">
+        <div id="canvasWrapper">
+
+            <div class="speaker speakerLeft">
+                <button id="aboutInfoButton" class="infoButton">About</button>
+                <div id="aboutModal" class="modalWrapper hidden">
+                    <div class="modal" id="aboutnote">
+                        <h1>BomberBoy</h1>
+                        <p id="aboutnote">BomberBoy is a (very) little BomberMan-clone. It's just a fun little side
+                            project to practice javascript and responsive design with touch controls. <br>
+                            There are 3 simple
+                            levels that repeat. Have fun!... or not. I'm just a paragraph, not a cop.
+                        </p>
+                        <div class="confirmButtonWrapper">
+                            <button class="confirmButton" id="aboutConfirm">OK</button>
+                        </div>
+                    </div>
+                </div>
+                <button id="touchInfoButton" class="infoButton">Touch?</button>
+                <div id="infoModal" class="modalWrapper hidden">
+                    <div class="modal" id="touchnote">
+                        <p id="touchnote">If you are checking touch screen options in the developer tools
+                            please reload after the change. The page only checks touch options on load.
+                        </p>
+                        <div class="confirmButtonWrapper">
+                            <button class="confirmButton" id="touchConfirm">OK</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="controlButton dPadControlButton controlButtonUp">UP</button>
+                <button class="controlButton dPadControlButton controlButtonDown">DOWN</button>
+                <button class="controlButton dPadControlButton controlButtonLeft">LEFT</button>
+                <button class="controlButton dPadControlButton controlButtonRight">RIGHT</button>
+            </div>
+            <div id="box1">
+                <canvas id="gameScreen"></canvas>
+            </div>
+            <div class="speaker speakerRight">
+                <button class="controlButton controlButtonStart">START</button>
+                <button class="controlButton actionControlButton controlButtonB">B</button>
+                <button class="controlButton actionControlButton controlButtonA">A</button>
+            </div>
+        </div>
+        <p id="tv-name">SONYA</p>
+    </div>
+
+    <script type="module" src="src/index.js"></script>
+
+</body>
+
+</html>
