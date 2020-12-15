@@ -1,8 +1,7 @@
 {
   "name": "BomberBoy",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "private": true,
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
@@ -10,9 +9,6 @@
     "sassmon": "nodemon --watch style.scss --exec 'npm run sass'",
     "freshSetup": "npm install && npm run sass"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
